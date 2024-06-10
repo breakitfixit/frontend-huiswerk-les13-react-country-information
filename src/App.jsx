@@ -46,16 +46,20 @@ function App() {
             <h2>Restfulcountries</h2>
             <p>Get all the countries</p>
             <button type='button' onClick={getRestfulCountries}>Get Countries</button>
-            <ul>{countries.map((country) => {
-                return (
-                    <li key={country.iso3}>
-                        <p className={country.continent}>{country.name}</p>
-                        <img src={country.href.flag}></img>
-                        <p>Has a population of {country.population} people</p>
-                    </li>
-                )
-            })}
-            </ul>
+            <li>
+                <p>{countries[0].name}</p>
+                <p>Has a population of {countries[0].population} people</p>
+            </li>
+            {/*<ul>{countries.map((country) => {*/}
+            {/*    return (*/}
+            {/*        <li key={country.iso3}>*/}
+            {/*            <p className={country.continent}>{country.name}</p>*/}
+            {/*            <img src={country.href.flag}></img>*/}
+            {/*            <p>Has a population of {country.population} people</p>*/}
+            {/*        </li>*/}
+            {/*    )*/}
+            {/*})}*/}
+            {/*</ul>*/}
             {/*{error === true && <p>Error!</p>}*/}
         </>
     )
