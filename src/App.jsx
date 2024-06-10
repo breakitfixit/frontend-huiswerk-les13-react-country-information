@@ -1,12 +1,14 @@
 import './App.css';
 import axios from 'axios'
+import {useState} from "react";
 
 function App() {
     const url = 'https://restfulcountries.com/api/v1/countries'
     const apiKeyRestfulCountries = '1074|JVLH4hYvwZegg1iypxmN6Oe1WMA71nj6Vuc1AwGB'
 
-    // State om landinformatie in op te slaan
 
+    // State om landinformatie in op te slaan
+    const [countries, setCountries] = useState([]);
 
     // async function
     async function getRestfulCountries() {
@@ -22,11 +24,15 @@ function App() {
 
             const countries = response.data.data; //
             if (Array.isArray(countries) && countries.length > 0) {
-                console.log('Name of the first country:', countries[0].name);
+                // console.log('Name of the first country:', countries[0].name);
+                // console.log('Capital of the first country:', countries[0].capital);
+
 
             } else {
                 console.log('No countries found in the response');
             }
+            setCountries(response.data.data);
+            console.log(countries)
 
         } catch (error) {
             console.error(error)
@@ -40,13 +46,20 @@ function App() {
             <h2>Restfulcountries</h2>
             <p>Get all the countries</p>
             <button type='button' onClick={getRestfulCountries}>Get Countries</button>
-            <ul>
-
+            <ul>{countries.map((country) => {
+                return (
+                    <li key={country.iso3}>
+                        <p className={country.continent}>{country.name}</p>
+                        <img src={country.href.flag}></img>
+                        <p>Has a population of {country.population} people</p>
+                    </li>
+                )
+            })}
             </ul>
+            {/*{error === true && <p>Error!</p>}*/}
         </>
     )
 }
-
 
 
 export default App
