@@ -29,11 +29,29 @@ function App() {
         }
     }
 
+    async function fetchCountry() {
+
+        try {
+            const response = await axios.get('https://restfulcountries.com/api/v1/countries/germany', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${apiKeyRestfulCountries}`
+                }
+            });
+            console.log(response);
+
+        } catch (e) {
+            toggleError(true);
+            console.error(e);
+        }
+    }
+
 
     return (
         <div className={'app-container'}>
             <img src={world_map} alt="World Map" style={{width: '50%', height: 'auto'}}/>
             <h2>Restfulcountries</h2>
+            <button type='button' onClick={fetchCountry}>Get Country</button>
             <p>Get all the countries</p>
             <button type='button' onClick={fetchCountries}>Get Countries</button>
             <ul className={'shown-countries'}>
@@ -45,7 +63,7 @@ function App() {
                             <p>Has a population of {country.population} people</p>
                         </li>
                     )
-            })}
+                })}
             </ul>
             {error === true && <p>Error!</p>}
         </div>
